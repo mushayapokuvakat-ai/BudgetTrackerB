@@ -1,8 +1,6 @@
+import 'dotenv/config';
 import app from './app';
-import dotenv from 'dotenv';
 import { startWhatsAppCron } from './jobs/whatsapp.job';
-
-dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 

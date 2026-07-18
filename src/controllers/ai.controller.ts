@@ -80,7 +80,13 @@ Do not include any markdown formatting like \`\`\`json. Just output the raw JSON
     });
 
     let jsonStr = response.text || "{}";
-    jsonStr = jsonStr.replace(/```json/g, '').replace(/```/g, '').trim();
+    
+    // Safely extract JSON object if the AI included conversational text
+    const jsonMatch = jsonStr.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      jsonStr = jsonMatch[0];
+    }
+
     
     try {
       const parsed = JSON.parse(jsonStr);
